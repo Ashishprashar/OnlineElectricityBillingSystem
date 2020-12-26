@@ -198,7 +198,7 @@ if(isset($_POST['pay'])){
     $q4 = "UPDATE `consumption_record` SET `status`= 1 WHERE `c_id` = $i";
     $qr4 = mysqli_query($conn,$q4);
     echo "<script language='javascript'>";
-    echo 'alert("Your alert msg");';
+    echo 'alert("Amount Paid successfully ");';
     echo 'window.location.replace("bill_detail.php");';
     echo "</script>";
     

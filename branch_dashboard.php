@@ -81,7 +81,7 @@ form{
     session_start();
     $conn =mysqli_connect("localhost","root","");
             $db = mysqli_select_db($conn,"ebill");
-            
+            $l=0;    
     ?>
 </head>
 <body>
@@ -341,12 +341,17 @@ form{
                 if($r['c_id'] == $c_id){
             $query ="DELETE FROM `consumer` WHERE `consumer`.`c_id` = '$c_id' and `consumer`.`branch_id`= '$b'";
             $query_run = mysqli_query($conn,$query);
-            
-               echo "<script>alert(\"Consumer with ID $c_id is deleted successfully\")</script>";
-                }else{
-                echo "<script>alert(\"No data found\")</script>";  
-                }       
+            $l=1;
+                }
+
             }
+            if($l != 0){
+            echo "<script>alert(\"Consumer with ID $c_id is deleted successfully\")</script>";
+            $l=0;
+        }else{
+        echo "<script>alert(\"No data found\")</script>";  
+
+        }  
         }else if(isset($_POST['consumption_record_list'])){
             $b =$_SESSION['b_id'];
             $q = "select * from `consumption_record` where `c_id` in (select `c_id` from `consumer` where `branch_id` = $b)";
